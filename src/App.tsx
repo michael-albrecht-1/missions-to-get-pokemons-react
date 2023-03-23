@@ -28,7 +28,7 @@ function App() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           {pokemons.map((p: Pokemon) => (
-            <Grid xs={12} md={6} lg={4}>
+            <Grid xs={12} sm={6} md={4} lg={3} xl={2}>
               <PokemonCard key={p.snapshot().number} pokemon={p} />
             </Grid>
           ))}
