@@ -1,5 +1,5 @@
-import { Mission } from 'src/app/mission/domain/entity/mission';
-import { MongoMissionDTO } from './mongoMission.DTO';
+import { Mission } from "../../../domain/entity/mission";
+import { MongoMissionDTO } from "./mongoMission.DTO";
 
 export class MongoMissionMapper {
   static mapToMission = (mongoMissionDTO: MongoMissionDTO): Mission => {

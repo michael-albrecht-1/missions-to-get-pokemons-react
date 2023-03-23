@@ -1,9 +1,9 @@
-import { ObservableRESTClient } from 'config/clients/observable.RESTClient';
-import { combineLatest, map, Observable, of, switchMap, tap } from 'rxjs';
-import { Pokemon } from '../../../../domain/entity/pokemon';
-import { PokemonLoader } from 'src/app/pokemon/usecases/loaders/PokemonLoader';
-import { PokemonMapper } from './pokemon.mapper';
-import { PokemonDTO } from './PokemonDTO';
+import { combineLatest, map, Observable, of, switchMap, tap } from "rxjs";
+import { ObservableRESTClient } from "../../../../../config/clients/observable.RESTClient";
+import { Pokemon } from "../../../../domain/entity/pokemon";
+import { PokemonLoader } from "../../../../usecases/loaders/PokemonLoader";
+import { PokemonMapper } from "./pokemon.mapper";
+import { PokemonDTO } from "./PokemonDTO";
 
 type PokemonNameAndLink = {
   name: string;
@@ -28,7 +28,7 @@ export class PokeApiPokemonLoader implements PokemonLoader {
 
     return this.http
       .get<PokeApiResponse>(
-        'https://pokeapi.co/api/v2/pokemon?limit=649&offset=0'
+        "https://pokeapi.co/api/v2/pokemon?limit=649&offset=0"
       )
       .pipe(
         map<PokeApiResponse, PokemonNameAndLink[]>((res) => res.results),
@@ -72,13 +72,13 @@ export class PokeApiPokemonLoader implements PokemonLoader {
   #savePokemonsInStorage = (pokemons: Pokemon[]) => {
     const pokemonsSnapshots = pokemons.map((p) => p.snapshot());
     localStorage.setItem(
-      'pokemonsSnapshots',
+      "pokemonsSnapshots",
       JSON.stringify(pokemonsSnapshots)
     );
   };
 
   #getPokemonsFromStorage = (): Pokemon[] | null => {
-    const stringPokemonsSnapshots = localStorage.getItem('pokemonsSnapshots');
+    const stringPokemonsSnapshots = localStorage.getItem("pokemonsSnapshots");
     if (!stringPokemonsSnapshots) {
       return null;
     }

@@ -9,27 +9,27 @@ import { PokeApiPokemonLoader } from "../../secondaries/real/REST-poke-api/PokeA
 import PokemonCard from "../pokemon-card/pokemon-card";
 
 export default function Pokemons() {
-    const pokemonsSouce: PokemonLoader = new PokeApiPokemonLoader(
-        new ObservableRESTClient()
-    );
-    const iSearchAllPokemons = new ISearchAllPokemons(pokemonsSouce);
-    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const pokemonsSouce: PokemonLoader = new PokeApiPokemonLoader(
+    new ObservableRESTClient()
+  );
+  const iSearchAllPokemons = new ISearchAllPokemons(pokemonsSouce);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
-    useEffect(() => {
-        iSearchAllPokemons.execute().subscribe((pokemons: Pokemon[]) => {
-            setPokemons(pokemons);
-        });
-    }, []);
+  useEffect(() => {
+    iSearchAllPokemons.execute().subscribe((pokemons: Pokemon[]) => {
+      setPokemons(pokemons);
+    });
+  }, []);
 
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-                {pokemons.map((p: Pokemon) => (
-                    <Grid key={p.snapshot().number} xs={12} sm={6} md={4} lg={3} xl={2}>
-                        <PokemonCard pokemon={p} />
-                    </Grid>
-                ))}
-            </Grid>
-        </Box>
-    );
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        {pokemons.map((p: Pokemon) => (
+          <Grid key={p.snapshot().number} xs={12} sm={6} md={4} lg={3} xl={2}>
+            <PokemonCard pokemon={p} />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
 }
