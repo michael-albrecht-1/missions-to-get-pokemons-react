@@ -9,8 +9,24 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { NavLink } from "react-router-dom";
 
-const pages = ["Pokemons", "Missions"];
+type Page = {
+  name: string;
+  link: string;
+};
+
+const pages: Page[] = [
+  {
+    name: "Pokemons",
+    link: "/pokemons",
+  },
+  {
+    name: "Missions",
+    link: "/missions",
+  },
+];
+
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function Navbar() {
@@ -35,7 +51,7 @@ export default function Navbar() {
   // };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ marginBottom: 3 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -67,21 +83,28 @@ export default function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map((page: Page) => (
+                <MenuItem
+                  key={page.name}
+                  onClick={handleCloseNavMenu}
+                  component={NavLink}
+                  to={page.link}
+                >
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map((page: Page) => (
               <Button
-                key={page}
+                key={page.name}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
+                component={NavLink}
+                to={page.link}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
