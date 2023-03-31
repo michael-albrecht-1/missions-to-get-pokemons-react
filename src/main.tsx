@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     errorElement: <PageNotFound />,
     children: [
       {
-        path: "pokemons",
+        path: "/",
         element: <Pokemons />,
       },
       {

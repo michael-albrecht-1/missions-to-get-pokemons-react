@@ -2,7 +2,7 @@ import {
   PokemonTypeWithIcons,
   POKEMON_TYPES_WITH_ICONS,
 } from "./pokemon-types-with-icons.inmemory";
-import { Icon } from "@mui/material";
+import { Chip, Icon } from "@mui/material";
 import { Stack } from "@mui/system";
 
 export default function PokemonTypesBadges({
@@ -10,7 +10,7 @@ export default function PokemonTypesBadges({
 }: {
   pokemonTypes: string[];
 }) {
-  const pokemonsTypesWithIcons = pokemonTypes.reduce(
+  const pokemonsTypesWithIcons = pokemonTypes?.reduce(
     (acc: PokemonTypeWithIcons[], type: string) => {
       const pokemonTypeWithIcon = POKEMON_TYPES_WITH_ICONS.find(
         (pokemonTypeWithIcon) => pokemonTypeWithIcon.name === type
@@ -25,12 +25,18 @@ export default function PokemonTypesBadges({
 
   return (
     <Stack direction="row">
-      {pokemonsTypesWithIcons.map((type: PokemonTypeWithIcons) => (
-        <Icon
+      {pokemonsTypesWithIcons?.map((type: PokemonTypeWithIcons) => (
+        <Chip
           key={type.name}
-          sx={{ color: type.color, marginRight: 1 }}
-          component={type.logo}
-          aria-label={type.name}
+          icon={<Icon component={type.logo} />}
+          label={type.name}
+          color="primary"
+          variant="outlined"
+          sx={{
+            marginRight: 1,
+            ".MuiChip-label": { color: type.color },
+            ".MuiChip-icon": { color: type.color },
+          }}
         />
       ))}
     </Stack>

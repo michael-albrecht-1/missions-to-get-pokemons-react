@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect, useState } from "react";
 import { ObservableRESTClient } from "../../../../config/clients/observable.RESTClient";
+import { PokemonDIFactory } from "../../../configuration/pokemonDI.factory";
 import { Pokemon } from "../../../domain/entity/pokemon";
 import { ISearchAllPokemons } from "../../../usecases/ISearchAllPokemons";
 import { PokemonLoader } from "../../../usecases/loaders/PokemonLoader";
@@ -9,9 +10,7 @@ import { PokeApiPokemonLoader } from "../../secondaries/real/REST-poke-api/PokeA
 import PokemonCard from "../pokemon-card/pokemon-card";
 
 export default function Pokemons() {
-  const pokemonsSouce: PokemonLoader = new PokeApiPokemonLoader(
-    new ObservableRESTClient()
-  );
+  const pokemonsSouce: PokemonLoader = PokemonDIFactory.pokemonLoader();
   const iSearchAllPokemons = new ISearchAllPokemons(pokemonsSouce);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 

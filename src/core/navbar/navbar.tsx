@@ -19,7 +19,7 @@ type Page = {
 const pages: Page[] = [
   {
     name: "Pokemons",
-    link: "/pokemons",
+    link: "/",
   },
   {
     name: "Missions",
